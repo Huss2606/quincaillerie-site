@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quincaillerie du Plateau – Dakar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    /* ─── VARIABLES ─────────────────────────────────────────── */
+    :root {
+      --orange:      #E8650A;
+      --orange-light:#FF8533;
+      --orange-dim:  #FFF0E6;
+      --dark:        #1A1A1A;
+      --gray-900:    #2C2C2C;
+      --gray-700:    #555;
+      --gray-400:    #AAA;
+      --gray-200:    #E8E8E8;
+      --gray-100:    #F5F5F5;
+      --white:       #FFFFFF;
+      --card-bg:     #FFFFFF;
+      --bg:          #F7F7F7;
+      --nav-bg:      #1A1A1A;
+      --text:        #1A1A1A;
+      --text-muted:  #777;
+      --shadow:      0 2px 12px rgba(0,0,0,.08);
+      --shadow-hover:0 6px 24px rgba(232,101,10,.18);
+      --radius:      12px;
+      --transition:  .22s ease;
+    }
+    body.dark {
+      --bg:         #121212;
+      --card-bg:    #1E1E1E;
+      --text:       #EFEFEF;
+      --text-muted: #999;
+      --gray-100:   #1E1E1E;
+      --gray-200:   #2A2A2A;
+      --white:      #1E1E1E;
+      --shadow:     0 2px 12px rgba(0,0,0,.4);
+      --orange-dim: #2A1800;
+    }
+
+    /* ─── RESET ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background var(--transition), color var(--transition);
+      min-height: 100vh;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    /* ─── TOP-BAR ────────────────────────────────────────────── */
+    .topbar {
+      background: var(--orange);
+      color: #fff;
+      font-size: .78rem;
+      font-weight: 500;
+      letter-spacing: .02em;
+      padding: 7px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .topbar span { display: flex; align-items: center; gap: 6px; }
+    .topbar svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+    /* ─── HEADER ─────────────────────────────────────────────── */
+    header {
+      background: var(--nav-bg);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 16px rgba(0,0,0,.25);
+    }
+    .header-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .logo-icon {
+      width: 38px; height: 38px;
+      background: var(--orange);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .logo-icon svg { width: 22px; height: 22px; }
+    .logo-text { line-height: 1.15; }
+    .logo-text strong {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 1.15rem;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      display: block;
+    }
+    .logo-text span {
+      font-size: .68rem;
+      color: var(--orange-light);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    /* search */
+    .search-wrap {
+      flex: 1;
+      max-width: 480px;
+      position: relative;
+    }
+    .search-wrap input {
+      width: 100%;
+      height: 42px;
+      border-radius: 8px;
+      border: 2px solid transparent;
+      background: rgba(255,255,255,.1);
+      color: #fff;
+      padding: 0 16px 0 44px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .9rem;
+      transition: border var(--transition), background var(--transition);
+      outline: none;
+    }
+    .search-wrap input::placeholder { color: rgba(255,255,255,.45); }
+    .search-wrap input:focus {
+      border-color: var(--orange);
+      background: rgba(255,255,255,.15);
+    }
+    .search-wrap .search-icon {
+      position: absolute;
+      left: 14px; top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255,255,255,.5);
+      pointer-events: none;
+    }
+    .search-wrap .search-icon svg { width: 18px; height: 18px; }
+
+    /* header right */
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-left: auto;
+    }
+    .btn-call {
+      display: flex; align-items: center; gap: 7px;
+      background: var(--orange);
+      color: #fff;
+      padding: 9px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: .88rem;
+      transition: background var(--transition), transform var(--transition);
+      white-space: nowrap;
+    }
+    .btn-call:hover { background: var(--orange-light); transform: translateY(-1px); }
+    .btn-call svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    .btn-dark {
+      width: 40px; height: 40px;
+      border-radius: 8px;
+      border: 2px solid rgba(255,255,255,.2);
+      color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      transition: border var(--transition), background var(--transition);
+    }
+    .btn-dark:hover { border-color: var(--orange); background: rgba(232,101,10,.15); }
+    .btn-dark svg { width: 18px; height: 18px; }
+
+    /* ─── NAV ────────────────────────────────────────────────── */
+    nav {
+      background: #242424;
+      border-top: 1px solid rgba(255,255,255,.07);
+    }
+    .nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      gap: 2px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .nav-inner::-webkit-scrollbar { display: none; }
+    .nav-section-label {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.3);
+      padding: 11px 10px 11px 0;
+      white-space: nowrap;
+      border-right: 1px solid rgba(255,255,255,.1);
+      margin-right: 4px;
+    }
+    .nav-btn {
+      display: flex; align-items: center; gap: 7px;
+      padding: 11px 16px;
+      font-size: .82rem;
+      font-weight: 500;
+      color: rgba(255,255,255,.65);
+      border-bottom: 3px solid transparent;
+      white-space: nowrap;
+      transition: color var(--transition), border-color var(--transition);
+    }
+    .nav-btn:hover, .nav-btn.active {
+      color: #fff;
+      border-bottom-color: var(--orange);
+    }
+    .nav-btn .nav-icon { font-size: 1rem; }
+
+    /* ─── HERO ────────────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, #1A1A1A 0%, #2C2010 100%);
+      padding: 56px 24px 52px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 60% at 50% 120%, rgba(232,101,10,.22) 0%, transparent 70%);
+    }
+    .hero h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+      line-height: 1.1;
+      position: relative;
+    }
+    .hero h1 span { color: var(--orange); }
+    .hero p {
+      color: rgba(255,255,255,.6);
+      margin-top: 12px;
+      font-size: 1rem;
+      position: relative;
+    }
+    .hero-search-mobile {
+      display: none;
+      max-width: 420px;
+      margin: 20px auto 0;
+      position: relative;
+    }
+    .hero-search-mobile input {
+      width: 100%;
+      height: 48px;
+      border-radius: 10px;
+      border: 2px solid rgba(255,255,255,.2);
+      background: rgba(255,255,255,.1);
+      color: #fff;
+      padding: 0 16px 0 48px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .95rem;
+      outline: none;
+    }
+    .hero-search-mobile input::placeholder { color: rgba(255,255,255,.4); }
+    .hero-search-mobile .si {
+      position: absolute; left: 15px; top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255,255,255,.5);
+    }
+    .hero-search-mobile .si svg { width: 18px; height: 18px; }
+
+    /* ─── MAIN ────────────────────────────────────────────────── */
+    .main-wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 40px 24px 60px;
+    }
+
+    /* Section title */
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .section-title h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      color: var(--text);
+    }
+    .section-title .pill {
+      background: var(--orange-dim);
+      color: var(--orange);
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 99px;
+    }
+    .section-divider {
+      flex: 1;
+      height: 1px;
+      background: var(--gray-200);
+    }
+
+    /* ─── CHIPS SECTION HEADER ────────────────────────────────── */
+    .chips-section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .chips-label {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .chips-divider {
+      flex: 1;
+      height: 1px;
+      background: var(--gray-200);
+    }
+
+    /* ─── CATEGORIES CHIPS ────────────────────────────────────── */
+    .categories-chips {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+    .chip {
+      display: flex; align-items: center; gap: 8px;
+      padding: 9px 18px;
+      border-radius: 10px;
+      border: 2px solid var(--gray-200);
+      background: var(--card-bg);
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      transition: all var(--transition);
+      cursor: pointer;
+    }
+    .chip:hover, .chip.active {
+      border-color: var(--orange);
+      color: var(--orange);
+      background: var(--orange-dim);
+    }
+    .chip .chip-icon { font-size: 1.1rem; line-height: 1; }
+
+    /* ─── PRODUCT GRID ────────────────────────────────────────── */
+    .products-section { margin-top: 10px; }
+    .category-block { margin-bottom: 52px; }
+    .category-block.hidden { display: none; }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 20px;
+    }
+
+    /* ─── PRODUCT CARD ────────────────────────────────────────── */
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: box-shadow var(--transition), transform var(--transition);
+      border: 1px solid var(--gray-200);
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-3px);
+    }
+    .card-img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .card-img::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,.05) 100%);
+    }
+    .card-body {
+      padding: 14px 16px 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-name {
+      font-weight: 600;
+      font-size: .9rem;
+      line-height: 1.35;
+      color: var(--text);
+      margin-bottom: 5px;
+    }
+    .card-desc {
+      font-size: .78rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      flex: 1;
+    }
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--gray-200);
+    }
+    .card-price {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--orange);
+      letter-spacing: .02em;
+    }
+    .btn-add {
+      display: flex; align-items: center; gap: 5px;
+      padding: 7px 12px;
+      border-radius: 8px;
+      background: var(--orange-dim);
+      color: var(--orange);
+      font-size: .75rem;
+      font-weight: 600;
+      border: 1.5px solid var(--orange);
+      transition: background var(--transition), color var(--transition);
+      white-space: nowrap;
+    }
+    .btn-add:hover { background: var(--orange); color: #fff; }
+
+    /* ─── NO RESULTS ──────────────────────────────────────────── */
+    .no-results {
+      display: none;
+      text-align: center;
+      padding: 64px 24px;
+      color: var(--text-muted);
+    }
+    .no-results .nr-icon { font-size: 3.5rem; margin-bottom: 16px; }
+    .no-results h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.4rem;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────────────── */
+    footer {
+      background: var(--nav-bg);
+      color: rgba(255,255,255,.75);
+      padding: 48px 24px 28px;
+    }
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 40px;
+    }
+    .footer-brand .logo-text strong { font-size: 1.3rem; }
+    .footer-brand p {
+      margin-top: 12px;
+      font-size: .84rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,.5);
+    }
+    .footer-col h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+    .footer-col ul { display: flex; flex-direction: column; gap: 9px; }
+    .footer-col ul li {
+      font-size: .84rem;
+      display: flex; align-items: flex-start; gap: 9px;
+    }
+    .footer-col ul li svg { width: 15px; height: 15px; flex-shrink: 0; margin-top: 2px; color: var(--orange); }
+    .footer-bottom {
+      max-width: 1280px;
+      margin: 32px auto 0;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: .78rem;
+      color: rgba(255,255,255,.35);
+    }
+    .footer-bottom a { color: var(--orange); }
+
+    /* ─── MOBILE CALL BUTTON (FAB) ────────────────────────────── */
+    .fab-call {
+      display: none;
+      position: fixed;
+      bottom: 24px; right: 20px;
+      background: var(--orange);
+      color: #fff;
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(232,101,10,.45);
+      z-index: 200;
+      transition: transform var(--transition);
+    }
+    .fab-call:hover { transform: scale(1.1); }
+    .fab-call svg { width: 24px; height: 24px; }
+
+    /* ─── SEARCH CLEAR BUTTON ────────────────────────────────── */
+    .search-clear {
+      position: absolute;
+      right: 10px; top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255,255,255,.55);
+      font-size: .8rem;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.15);
+      display: flex; align-items: center; justify-content: center;
+      transition: background var(--transition), color var(--transition);
+    }
+    .search-clear:hover { background: var(--orange); color: #fff; }
+    .search-wrap input { padding-right: 36px; }
+    .mobile-clear { color: rgba(255,255,255,.55); }
+
+    /* ─── SEARCH RESULTS NAV TAB ─────────────────────────────── */
+    .nav-btn-search {
+      border-left: 1px solid rgba(255,255,255,.12);
+      margin-left: 4px;
+      padding-left: 18px;
+      color: var(--orange-light) !important;
+    }
+    .nav-btn-search.active { border-bottom-color: var(--orange-light) !important; }
+    .nav-search-count {
+      background: var(--orange);
+      color: #fff;
+      font-size: .68rem;
+      font-weight: 700;
+      padding: 1px 7px;
+      border-radius: 99px;
+      margin-left: 4px;
+    }
+
+    /* ─── RESULT BAR ─────────────────────────────────────────── */
+    .result-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--orange-dim);
+      border: 1.5px solid var(--orange);
+      border-radius: 10px;
+      padding: 11px 18px;
+      margin-bottom: 24px;
+      font-size: .88rem;
+      font-weight: 500;
+      color: var(--orange);
+      flex-wrap: wrap;
+    }
+    .result-bar-icon { font-size: 1rem; }
+    .result-bar-clear {
+      margin-left: auto;
+      font-size: .78rem;
+      font-weight: 600;
+      color: var(--orange);
+      background: none;
+      border: 1.5px solid var(--orange);
+      border-radius: 6px;
+      padding: 4px 12px;
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition);
+    }
+    .result-bar-clear:hover { background: var(--orange); color: #fff; }
+
+    /* ─── SEARCH HIGHLIGHT ────────────────────────────────────── */
+    mark {
+      background: rgba(232,101,10,.25);
+      color: var(--orange);
+      border-radius: 3px;
+      padding: 0 2px;
+    }
+
+    /* ─── RESPONSIVE ──────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: 1 / -1; }
+    }
+    @media (max-width: 640px) {
+      .search-wrap { display: none; }
+      .hero-search-mobile { display: block; }
+      .btn-call span { display: none; }
+      .btn-call { padding: 9px 12px; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .fab-call { display: flex; }
+      .topbar { font-size: .72rem; padding: 6px 16px; }
+      .header-inner { padding: 0 16px; }
+      .main-wrap { padding: 28px 16px 80px; }
+      .products-grid { grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 14px; }
+    }
+    @media (max-width: 400px) {
+      .products-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <span>
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+      103, Rue Galandou Diouf, Dakar – Sénégal
+    </span>
+    <span>
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 7V5z"/></svg>
+      (+221) 33 822 99 47
+    </span>
+    <span>
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      Lun–Sam : 8h–19h
+    </span>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <a href="#" class="logo">
+        <div class="logo-icon">
+          <svg fill="none" stroke="#fff" stroke-width="2.2" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <div class="logo-text">
+          <strong>Quincaillerie du Plateau</strong>
+          <span>Dakar · Sénégal</span>
+        </div>
+      </a>
+
+      <div class="search-wrap">
+        <div class="search-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
+        <input type="search" id="searchMain" placeholder="Rechercher un produit…" autocomplete="off"/>
+        <button class="search-clear" id="clearMain" title="Effacer" style="display:none">✕</button>
+      </div>
+
+      <div class="header-right">
+        <a href="tel:+221338229947" class="btn-call">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 7V5z"/></svg>
+          <span>Appeler maintenant</span>
+        </a>
+        <button class="btn-dark" id="themeToggle" title="Mode sombre">
+          <svg id="iconMoon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+          <svg id="iconSun" style="display:none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAV - Navigation rapide par catégorie -->
+  <nav aria-label="Catégories">
+    <div class="nav-inner" id="navCats">
+      <span class="nav-section-label">Navigation :</span>
+      <button class="nav-btn active" data-cat="all"><span class="nav-icon">🏠</span> Tous les produits</button>
+      <button class="nav-btn nav-btn-search" id="navSearchTab" data-cat="__search__" style="display:none">
+        <span class="nav-icon">🔍</span> Résultats de recherche <span class="nav-search-count" id="navSearchCount"></span>
+      </button>
+      <button class="nav-btn" data-cat="outillage-main"><span class="nav-icon">🔨</span> Outillage à main</button>
+      <button class="nav-btn" data-cat="outillage-elec"><span class="nav-icon">⚡</span> Outillage électrique</button>
+      <button class="nav-btn" data-cat="plomberie"><span class="nav-icon">🚰</span> Plomberie</button>
+      <button class="nav-btn" data-cat="grillages"><span class="nav-icon">🔩</span> Grillages</button>
+      <button class="nav-btn" data-cat="peinture"><span class="nav-icon">🎨</span> Peinture</button>
+      <button class="nav-btn" data-cat="jardinage"><span class="nav-icon">🌿</span> Jardinage</button>
+      <button class="nav-btn" data-cat="quincaillerie"><span class="nav-icon">⚙️</span> Quincaillerie</button>
+      <button class="nav-btn" data-cat="securite"><span class="nav-icon">🦺</span> Sécurité</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Tout ce qu'il vous faut,<br><span>qualité garantie</span></h1>
+    <p>Plus de 2 000 produits disponibles · Livraison rapide · Au cœur de Dakar</p>
+    <div class="hero-search-mobile">
+      <div class="si"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
+      <input type="search" id="searchMobile" placeholder="Rechercher un produit…" autocomplete="off"/>
+      <button class="search-clear mobile-clear" id="clearMobile" title="Effacer" style="display:none">✕</button>
+    </div>
+  </section>
+
+  <!-- MAIN -->
+  <main class="main-wrap">
+
+    <!-- CATEGORY CHIPS -->
+    <div class="chips-section-header">
+      <span class="chips-label">Filtrer par catégorie</span>
+      <div class="chips-divider"></div>
+    </div>
+    <div class="categories-chips" id="chipContainer">
+      <button class="chip active" data-cat="all"><span class="chip-icon">🏠</span> Tout</button>
+      <button class="chip" data-cat="outillage-main"><span class="chip-icon">🔨</span> Outillage à main</button>
+      <button class="chip" data-cat="outillage-elec"><span class="chip-icon">⚡</span> Outillage électrique</button>
+      <button class="chip" data-cat="plomberie"><span class="chip-icon">🚰</span> Plomberie</button>
+      <button class="chip" data-cat="grillages"><span class="chip-icon">🔩</span> Grillages</button>
+      <button class="chip" data-cat="peinture"><span class="chip-icon">🎨</span> Peinture</button>
+      <button class="chip" data-cat="jardinage"><span class="chip-icon">🌿</span> Jardinage</button>
+      <button class="chip" data-cat="quincaillerie"><span class="chip-icon">⚙️</span> Quincaillerie</button>
+      <button class="chip" data-cat="securite"><span class="chip-icon">🦺</span> Sécurité</button>
+    </div>
+
+    <!-- RESULT COUNTER BAR -->
+    <div class="result-bar" id="resultBar" style="display:none">
+      <span class="result-bar-icon">🔍</span>
+      <span id="resultText"></span>
+      <button class="result-bar-clear" id="resultBarClear">✕ Effacer la recherche</button>
+    </div>
+
+    <!-- NO RESULTS -->
+    <div class="no-results" id="noResults">
+      <div class="nr-icon">🔍</div>
+      <h3>Aucun produit trouvé</h3>
+      <p>Essayez un autre mot-clé ou parcourez les catégories.</p>
+    </div>
+
+    <!-- PRODUCTS SECTION -->
+    <div class="products-section" id="productsSection"></div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="logo">
+          <div class="logo-icon">
+            <svg fill="none" stroke="#fff" stroke-width="2.2" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <div class="logo-text">
+            <strong>Quincaillerie du Plateau</strong>
+            <span>Dakar · Sénégal</span>
+          </div>
+        </div>
+        <p>Votre quincaillerie de référence à Dakar. Qualité garantie sur chaque produit, conseils professionnels et service disponible 6 jours sur 7.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li>
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 7V5z"/></svg>
+            <span>(+221) 33 822 99 47</span>
+          </li>
+          <li>
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            <span>103, Rue Galandou Diouf,<br>Dakar – Sénégal</span>
+          </li>
+          <li>
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <span>Lun – Sam : 8h00 – 19h00</span>
+          </li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Catégories</h4>
+        <ul>
+          <li><span>🔨</span> Outillage à main</li>
+          <li><span>⚡</span> Outillage électrique</li>
+          <li><span>🚰</span> Plomberie</li>
+          <li><span>🎨</span> Peinture & accessoires</li>
+          <li><span>🌿</span> Jardinage</li>
+          <li><span>⚙️</span> Quincaillerie générale</li>
+          <li><span>🦺</span> Sécurité</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Quincaillerie du Plateau · Dakar, Sénégal</span>
+      <span>Conçu avec ❤️ pour nos clients</span>
+    </div>
+  </footer>
+
+  <!-- FAB CALL (mobile) -->
+  <a href="tel:+221338229947" class="fab-call" title="Appeler maintenant">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 7V5z"/></svg>
+  </a>
+
+  <script>
+  /* ─── DATA ──────────────────────────────────────────────────── */
+  const CATEGORIES = [
+    {
+      id: 'outillage-main',
+      label: 'Outillage à main',
+      icon: '🔨',
+      color: '#FFF0E6',
+      products: [
+        { name: 'Marteau de charpentier', desc: 'Manche bois robuste, tête acier forgé 500g', icon: '🔨', bg: '#FFF0E6' },
+        { name: 'Tournevis plat 6mm', desc: 'Pointe traitée, manche bi-matière antidérapant', icon: '🪛', bg: '#E6F0FF' },
+        { name: 'Pince coupante 180mm', desc: 'Acier inoxydable, coupe nette et précise', icon: '🔧', bg: '#F0FFE6' },
+        { name: 'Niveau à bulle 60cm', desc: 'Aluminium extrudé, 3 fioles de précision', icon: '📏', bg: '#FFE6F0' },
+        { name: 'Clé à molette 30cm', desc: 'Ouverture réglable 0–40mm, acier chromé', icon: '🔧', bg: '#FFF5E6' },
+        { name: 'Scie égoïne 550mm', desc: 'Lame trempée, 7 dents/pouce, coupe bois', icon: '🪚', bg: '#E6FFF5' },
+        { name: 'Mètre ruban 5m', desc: 'Boîtier ABS, lame acier double face', icon: '📐', bg: '#E6E6FF' },
+        { name: 'Ciseau à bois 25mm', desc: 'Acier carbone, manche plastique résistant', icon: '🔧', bg: '#FFE6E6' },
+        { name: 'Pince multiprise 250mm', desc: 'Joint démontable, serrage puissant et précis', icon: '🔩', bg: '#E6FFF0' },
+      ]
+    },
+    {
+      id: 'outillage-elec',
+      label: 'Outillage électrique',
+      icon: '⚡',
+      color: '#FFFBE6',
+      products: [
+        { name: 'Perceuse visseuse 18V', desc: 'Batterie lithium, mandrin 13mm, 2 vitesses', icon: '🔌', bg: '#FFFBE6' },
+        { name: 'Meuleuse d\'angle 125mm', desc: '850W, disque abrasif inclus, protection', icon: '⚡', bg: '#FFE6E6' },
+        { name: 'Scie circulaire 185mm', desc: '1200W, profondeur de coupe 65mm', icon: '⚙️', bg: '#E6FFFC' },
+        { name: 'Ponceuse orbitale 230W', desc: 'Base velcro 125mm, 6 mouvements', icon: '🔄', bg: '#F0E6FF' },
+        { name: 'Marteau piqueur 800W', desc: 'SDS-Plus, énergie de frappe 3J, coffret', icon: '🔨', bg: '#E6F0FF' },
+        { name: 'Visseuse à choc 18V', desc: 'Couple max 180Nm, tête compacte', icon: '🔌', bg: '#E6FFE6' },
+        { name: 'Lampe LED rechargeable', desc: '2000 lumens, batterie 4h, orientable 360°', icon: '💡', bg: '#FFFBE6' },
+        { name: 'Soufflette électrique', desc: '230V, débit 450 L/min, embout flexible', icon: '💨', bg: '#E6F5FF' },
+      ]
+    },
+    {
+      id: 'plomberie',
+      label: 'Plomberie',
+      icon: '🚰',
+      color: '#E6F7FF',
+      products: [
+        { name: 'Tuyau PVC 32mm × 3m', desc: 'Pression PN16, raccordement à coller', icon: '🚿', bg: '#E6F7FF' },
+        { name: 'Robinet d\'arrêt 15/21', desc: 'Corps laiton, papillon rouge, étanche', icon: '🔧', bg: '#E6FFFA' },
+        { name: 'Coude PVC 90° 40mm', desc: 'Connexion femelle-femelle, ABS résistant', icon: '↪️', bg: '#F0FFE6' },
+        { name: 'Chasse d\'eau complète', desc: 'Mécanisme double débit 3/6L, silencieux', icon: '🚽', bg: '#EEE6FF' },
+        { name: 'Siphon sous-évier', desc: 'PVC blanc, sortie 40mm, réglable', icon: '🚰', bg: '#FFE6F0' },
+        { name: 'Joint plat caoutchouc ×10', desc: 'Diamètre 20mm, résistance eau chaude', icon: '⭕', bg: '#FFF9E6' },
+        { name: 'Té PVC 50mm', desc: 'Raccord 3 voies, assemblage collé ou joint', icon: '🔩', bg: '#E6F0FF' },
+      ]
+    },
+    {
+      id: 'grillages',
+      label: 'Grillages',
+      icon: '🔩',
+      color: '#F0F0F0',
+      products: [
+        { name: 'Grillage soudé 1m × 10m', desc: 'Maille 50×50mm, fil galvanisé Ø2.5mm', icon: '🟫', bg: '#F0F0F0' },
+        { name: 'Grillage volière 1m × 5m', desc: 'Maille hexagonale 25mm, fil 0.9mm', icon: '🔳', bg: '#E6F0FF' },
+        { name: 'Poteau acier 2m × 50mm', desc: 'Galvanisé à chaud, pied à sceller', icon: '🪨', bg: '#FFF0E6' },
+        { name: 'Grillage souple 1.5m × 10m', desc: 'Maille 50mm, torsadé galvanisé', icon: '🔲', bg: '#F0FFE6' },
+        { name: 'Fil de fer galvanisé 500g', desc: 'Diamètre 1.2mm, bobine 40m environ', icon: '🪡', bg: '#FFE6F5' },
+        { name: 'Brise-vue vert 1m × 5m', desc: 'Occultation 95%, résistant UV', icon: '🌿', bg: '#E6FFE6' },
+      ]
+    },
+    {
+      id: 'peinture',
+      label: 'Peinture & Accessoires',
+      icon: '🎨',
+      color: '#FFF0FB',
+      products: [
+        { name: 'Peinture blanche mate 5L', desc: 'Lessivable, séchage 2h, couvrance 8m²/L', icon: '🪣', bg: '#FFF0FB' },
+        { name: 'Rouleau laqueur 22cm', desc: 'Mousse courte 5mm, support plastique', icon: '🖌️', bg: '#E6F7FF' },
+        { name: 'Pinceau plat 50mm', desc: 'Soies synthétiques, manche bois verni', icon: '🖌️', bg: '#FFFBE6' },
+        { name: 'Bâche de protection 3×4m', desc: 'PE renforcé 80g, résistante aux taches', icon: '🟦', bg: '#E6F0FF' },
+        { name: 'Ruban de masquage 25mm', desc: 'Papier crêpe, adhésif 14 jours', icon: '📦', bg: '#FFE6E6' },
+        { name: 'Peinture façade 10L', desc: 'Hydropliolite, anti-salissure, blanc neige', icon: '🏠', bg: '#E6FFE6' },
+        { name: 'Enduit de rebouchage 1kg', desc: 'Séchage rapide, poncable, ton blanc', icon: '🪣', bg: '#F0E6FF' },
+        { name: 'Décapant gel 1L', desc: 'Action puissante, compatible bois/métal', icon: '🧪', bg: '#FFF5E6' },
+        { name: 'Spatule à enduire 12cm', desc: 'Lame flexible inox, manche plastique', icon: '🔪', bg: '#E6FFFA' },
+      ]
+    },
+    {
+      id: 'jardinage',
+      label: 'Jardinage',
+      icon: '🌿',
+      color: '#E6FFE6',
+      products: [
+        { name: 'Bêche carrée inox', desc: 'Lame 22cm, manche bois 120cm', icon: '🌱', bg: '#E6FFE6' },
+        { name: 'Arrosoir 10L inox', desc: 'Bec amovible, poignée ergonomique', icon: '🚿', bg: '#E6F7FF' },
+        { name: 'Coupe-bordures manuel', desc: 'Lame acier, poignée bois, largeur 22cm', icon: '✂️', bg: '#FFF9E6' },
+        { name: 'Seau plastique 15L', desc: 'Poignée métal renforcée, gradué', icon: '🪣', bg: '#FFE6F0' },
+        { name: 'Gants jardinier taille L', desc: 'Latex enduit, lavable, résistant épines', icon: '🧤', bg: '#E6F0FF' },
+        { name: 'Sac terreau universel 40L', desc: 'Enrichi compost, pH équilibré', icon: '🌍', bg: '#E6FFE6' },
+        { name: 'Tuyau d\'arrosage 25m', desc: 'Multicouches PVC, résistant torsion', icon: '🌊', bg: '#E6FFFC' },
+      ]
+    },
+    {
+      id: 'quincaillerie',
+      label: 'Quincaillerie générale',
+      icon: '⚙️',
+      color: '#F5F5F5',
+      products: [
+        { name: 'Vis à bois TF 3.5×35 ×200', desc: 'Acier zingué, tête fraisée, boîte 200', icon: '🔩', bg: '#F5F5F5' },
+        { name: 'Boulon M8×40 + écrou ×25', desc: 'Acier 8.8, tête hexagonale, galvanisé', icon: '⚙️', bg: '#E6F0FF' },
+        { name: 'Clou pointe paris 4×100 1kg', desc: 'Fil tréfilé galvanisé, pointe diamant', icon: '📌', bg: '#FFE6E6' },
+        { name: 'Charnière acier 80mm ×2', desc: 'Zinguée, 3 points de fixation, réversible', icon: '🔄', bg: '#E6FFE6' },
+        { name: 'Cadenas à code 40mm', desc: '4 chiffres, anse acier trempé', icon: '🔒', bg: '#FFF0E6' },
+        { name: 'Rondelle plate M10 ×50', desc: 'Acier zingué, DIN 125, sachet 50', icon: '⭕', bg: '#E6FFFA' },
+        { name: 'Colle époxy bicomposant', desc: '5min, résistance 150kg/cm², transparent', icon: '🧪', bg: '#FFFBE6' },
+        { name: 'Ancre à expansion M10 ×10', desc: 'Acier zingué, pour béton et parpaing', icon: '🔧', bg: '#F0E6FF' },
+        { name: 'Équerre d\'assemblage 40mm', desc: 'Acier galvanisé, ép. 1.5mm, 2 trous', icon: '📐', bg: '#FFE6F0' },
+        { name: 'Gond réglable 14×14cm', desc: 'Acier thermolaqué noir, portée 80kg', icon: '🔩', bg: '#E6F7FF' },
+      ]
+    },
+    {
+      id: 'securite',
+      label: 'Sécurité',
+      icon: '🦺',
+      color: '#FFF5E6',
+      products: [
+        { name: 'Casque de chantier jaune', desc: 'Norme EN 397, réglable 54–62cm', icon: '⛑️', bg: '#FFF5E6' },
+        { name: 'Gants de manutention T9', desc: 'Dos coton, paume latex, norme EN 388', icon: '🧤', bg: '#E6FFE6' },
+        { name: 'Lunettes de protection', desc: 'Anti-choc, antirayure, branches réglables', icon: '🥽', bg: '#E6F0FF' },
+        { name: 'Gilet haute visibilité XL', desc: 'Bandes rétro-réfléchissantes, classe 2', icon: '🦺', bg: '#FFFBE6' },
+        { name: 'Masque anti-poussière ×5', desc: 'FFP2, soupape d\'expiration, valeur 95%', icon: '😷', bg: '#FFE6E6' },
+        { name: 'Bouchons d\'oreille ×10 paires', desc: 'SNR 37dB, mousse PU, usage unique', icon: '🔇', bg: '#F0E6FF' },
+        { name: 'Chaussures sécurité S1P T42', desc: 'Embout acier, semelle anti-perforation', icon: '👟', bg: '#E6FFFA' },
+      ]
+    }
+  ];
+
+  /* ─── RENDER ─────────────────────────────────────────────── */
+  function buildProducts() {
+    const section = document.getElementById('productsSection');
+    section.innerHTML = '';
+    CATEGORIES.forEach(cat => {
+      const block = document.createElement('div');
+      block.className = 'category-block';
+      block.dataset.cat = cat.id;
+      block.innerHTML = `
+        <div class="section-title">
+          <h2>${cat.icon} ${cat.label}</h2>
+          <span class="pill">${cat.products.length} produits</span>
+          <div class="section-divider"></div>
+        </div>
+        <div class="products-grid">
+          ${cat.products.map(p => `
+            <div class="card" data-name="${p.name.toLowerCase()}" data-desc="${p.desc.toLowerCase()}">
+              <div class="card-img" style="background:${p.bg};">${p.icon}</div>
+              <div class="card-body">
+                <div class="card-name">${p.name}</div>
+                <div class="card-desc">${p.desc}</div>
+                <div class="card-footer">
+                  <span class="card-price">0 FCFA</span>
+                  <button class="btn-add">👁 Détails</button>
+                </div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+      section.appendChild(block);
+    });
+  }
+
+  /* ─── STATE ──────────────────────────────────────────────── */
+  let currentCat   = 'all';   // active category
+  let previousCat  = 'all';   // cat before search started
+  let currentQuery = '';
+  let isSearchMode = false;
+
+  /* ─── HELPERS ────────────────────────────────────────────── */
+  function highlight(text, q) {
+    if (!q) return text;
+    const re = new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi');
+    return text.replace(re, '<mark>$1</mark>');
+  }
+
+  function pluralize(n) {
+    return n > 1 ? `${n} produits trouvés` : `${n} produit trouvé`;
+  }
+
+  /* ─── APPLY FILTERS ──────────────────────────────────────── */
+  function applyFilters() {
+    const q     = currentQuery.trim().toLowerCase();
+    const blocks = document.querySelectorAll('.category-block');
+    let totalVisible = 0;
+    let catsWithResults = 0;
+
+    blocks.forEach(block => {
+      const cat = block.dataset.cat;
+
+      // In search mode: show all cats, ignore cat filter
+      // In normal mode: apply cat filter
+      const catMatch = isSearchMode || currentCat === 'all' || cat === currentCat;
+      if (!catMatch) { block.classList.add('hidden'); return; }
+
+      const cards = block.querySelectorAll('.card');
+      let visibleInBlock = 0;
+
+      cards.forEach(card => {
+        const nameRaw = card.dataset.name;
+        const descRaw = card.dataset.desc;
+        const match   = !q || nameRaw.includes(q) || descRaw.includes(q);
+        card.style.display = match ? '' : 'none';
+
+        if (match) {
+          visibleInBlock++;
+          const nameEl = card.querySelector('.card-name');
+          const descEl = card.querySelector('.card-desc');
+          nameEl.innerHTML = q ? highlight(nameEl.textContent, q) : nameEl.textContent;
+          descEl.innerHTML = q ? highlight(descEl.textContent, q) : descEl.textContent;
+        }
+      });
+
+      const blockVisible = visibleInBlock > 0;
+      block.classList.toggle('hidden', !blockVisible);
+      if (blockVisible) catsWithResults++;
+      totalVisible += visibleInBlock;
+    });
+
+    // ── Result bar
+    const resultBar  = document.getElementById('resultBar');
+    const resultText = document.getElementById('resultText');
+    if (isSearchMode && q) {
+      resultBar.style.display = 'flex';
+      const catWord = catsWithResults > 1
+        ? `dans ${catsWithResults} catégories`
+        : catsWithResults === 1 ? `dans 1 catégorie` : '';
+      resultText.textContent = `${pluralize(totalVisible)} ${catWord} pour « ${currentQuery.trim()} »`;
+      // Update nav badge
+      document.getElementById('navSearchCount').textContent = totalVisible;
+    } else {
+      resultBar.style.display = 'none';
+    }
+
+    // ── No results
+    document.getElementById('noResults').style.display = totalVisible === 0 ? 'block' : 'none';
+  }
+
+  /* ─── SEARCH MODE ON/OFF ─────────────────────────────────── */
+  function enterSearchMode() {
+    if (!isSearchMode) {
+      previousCat  = currentCat;
+      isSearchMode = true;
+    }
+    // Show & activate search tab in nav
+    const tab = document.getElementById('navSearchTab');
+    tab.style.display = '';
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    tab.classList.add('active');
+    // Deactivate chips
+    document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  }
+
+  function exitSearchMode() {
+    isSearchMode = false;
+    currentQuery = '';
+    // Hide search tab
+    const tab = document.getElementById('navSearchTab');
+    tab.classList.remove('active');
+    tab.style.display = 'none';
+    // Restore previous category
+    setCategory(previousCat, /* skipSearch= */ true);
+    // Clear inputs
+    document.getElementById('searchMain').value   = '';
+    document.getElementById('searchMobile').value = '';
+    // Hide clear buttons
+    document.getElementById('clearMain').style.display   = 'none';
+    document.getElementById('clearMobile').style.display = 'none';
+  }
+
+  /* ─── SYNC SEARCH ────────────────────────────────────────── */
+  function syncSearch(val) {
+    currentQuery = val;
+    // Mirror value to both inputs
+    document.getElementById('searchMain').value   = val;
+    document.getElementById('searchMobile').value = val;
+
+    const hasQuery = val.trim().length > 0;
+    // Show/hide ✕ buttons
+    document.getElementById('clearMain').style.display   = hasQuery ? '' : 'none';
+    document.getElementById('clearMobile').style.display = hasQuery ? '' : 'none';
+
+    if (hasQuery) {
+      enterSearchMode();
+    } else {
+      exitSearchMode();
+      return; // exitSearchMode calls applyFilters via setCategory
+    }
+    applyFilters();
+  }
+
+  document.getElementById('searchMain').addEventListener('input',   e => syncSearch(e.target.value));
+  document.getElementById('searchMobile').addEventListener('input', e => syncSearch(e.target.value));
+  document.getElementById('clearMain').addEventListener('click',    () => syncSearch(''));
+  document.getElementById('clearMobile').addEventListener('click',  () => syncSearch(''));
+  document.getElementById('resultBarClear').addEventListener('click', () => syncSearch(''));
+
+  /* ─── SET CATEGORY ───────────────────────────────────────── */
+  function setCategory(cat, skipSearchExit = false) {
+    // If user clicks a cat tab while in search mode → exit search first
+    if (isSearchMode && !skipSearchExit && cat !== '__search__') {
+      exitSearchMode();
+      return;
+    }
+    currentCat = cat;
+    // Sync nav buttons (exclude search tab from .nav-btn loop)
+    document.querySelectorAll('.nav-btn:not(#navSearchTab)').forEach(b =>
+      b.classList.toggle('active', b.dataset.cat === cat)
+    );
+    // Sync chips
+    document.querySelectorAll('.chip').forEach(c =>
+      c.classList.toggle('active', c.dataset.cat === cat)
+    );
+    applyFilters();
+  }
+
+  document.querySelectorAll('.nav-btn:not(#navSearchTab)').forEach(btn =>
+    btn.addEventListener('click', () => setCategory(btn.dataset.cat))
+  );
+  document.querySelectorAll('.chip').forEach(chip =>
+    chip.addEventListener('click', () => setCategory(chip.dataset.cat))
+  );
+
+  /* ─── DARK MODE ──────────────────────────────────────────── */
+  const toggleBtn = document.getElementById('themeToggle');
+  const moon = document.getElementById('iconMoon');
+  const sun  = document.getElementById('iconSun');
+
+  function setDark(on) {
+    document.body.classList.toggle('dark', on);
+    moon.style.display = on ? 'none' : '';
+    sun.style.display  = on ? '' : 'none';
+    localStorage.setItem('qdp-dark', on ? '1' : '0');
+  }
+  toggleBtn.addEventListener('click', () => setDark(!document.body.classList.contains('dark')));
+  if (localStorage.getItem('qdp-dark') === '1') setDark(true);
+
+  /* ─── INIT ───────────────────────────────────────────────── */
+  buildProducts();
+  applyFilters();
+  </script>
+</body>
+</html>
